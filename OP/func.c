@@ -1,20 +1,11 @@
+#define FRAMEBUFFER ((volatile unsigned short*)0xA0000) 
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 480
 
-#include <locale.h>
-int main(){
-  setlocale(LC_ALL, "Portuguse");
-  int f = 0x0F;
-  printv("%i", f);
-  return 0;
-  
-
-
-}
-
-
-
-void _limpar(){
-  char* clear = (char*)0xa;
-  clear[0] = 0x0F;
-  clear[1] = 0x0A;
+void clear_screen() {
+    int pixels = SCREEN_WIDTH * SCREEN_HEIGHT;
+    for (int i = 0; i < pixels; i++) {
+        FRAMEBUFFER[i] = 0x0000;  
+    }
 }
 
